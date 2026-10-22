@@ -160,14 +160,14 @@ export const RegistrationPage: React.FC = () => {
       {/* Banner */}
       <section className="section section--dark" style={{ paddingBlock: 'var(--space-10)' }}>
         <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <span className="badge badge--primary" style={{ alignSelf: 'flex-start' }}>
+          {/* <span className="badge badge--primary" style={{ alignSelf: 'flex-start' }}>
             IEEE Conference Record #67723 · Registration Portal
-          </span>
+          </span> */}
           <h1 style={{ fontSize: 'var(--text-3xl)', color: '#ffffff' }}>
             Conference Registration & Fee Matrix
           </h1>
           <p style={{ color: 'var(--color-border-subtle)', maxWidth: '820px', fontSize: 'var(--text-base)' }}>
-            Welcome to the official registration portal for ICSCSD 2026. Register your accepted paper or attendee pass through the integrated Razorpay checkout or via VIT Pune’s learner.vierp.in portal.
+            Welcome to the official registration portal for ICSCSD 2026. Register your accepted paper or attendee pass through the integrated Razorpay checkout or via VIT Pune vierp portal.
           </p>
 
           <div style={{ marginTop: '8px', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
@@ -194,9 +194,9 @@ export const RegistrationPage: React.FC = () => {
               <h2 className="policy-card__title">
                 Registration Fee Schedule
               </h2>
-              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
+              {/* <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
                 All Indian author fees include statutory 18% GST (9% CGST + 9% SGST)
-              </span>
+              </span> */}
             </div>
           </div>
 
@@ -206,10 +206,10 @@ export const RegistrationPage: React.FC = () => {
                 <tr>
                   <th>Member Category</th>
                   <th style={{ textAlign: 'center' }}>Indian Base Fee</th>
-                  <th style={{ textAlign: 'center' }}>18% GST (CGST + SGST)</th>
+                  <th style={{ textAlign: 'center' }}>18% GST</th>
                   <th style={{ textAlign: 'center' }}>Total Indian Fee</th>
                   <th style={{ textAlign: 'center' }}>Foreign Author Fee</th>
-                  <th style={{ textAlign: 'center' }}>Online Action</th>
+                  <th style={{ textAlign: 'center' }}></th>
                 </tr>
               </thead>
               <tbody>
@@ -217,16 +217,16 @@ export const RegistrationPage: React.FC = () => {
                   <td>
                     <strong>Professional Member (non-IEEE)</strong>
                   </td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)' }}>₹8,000</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--color-text-muted)' }}>₹1,440</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--color-navy-950)' }}>₹9,440</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-emerald-600)' }}>$120</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif" }}>₹8,000</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", color: 'var(--color-text-muted)' }}>₹1,440</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", fontWeight: 800, color: 'var(--color-navy-950)' }}>₹9,440</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", fontWeight: 700, color: 'var(--color-emerald-600)' }}>$120</td>
                   <td style={{ textAlign: 'center' }}>
                     <button
                       type="button"
                       onClick={() => openRegistrationForCategory('PROFESSIONAL_NON_IEEE')}
                       className="btn btn--primary"
-                      style={{ fontSize: '0.75rem', padding: '6px 14px' }}
+                      style={{ fontSize: '0.75rem', padding: '4px 6px' }}
                     >
                       Register Now
                     </button>
@@ -238,16 +238,16 @@ export const RegistrationPage: React.FC = () => {
                     <strong>Professional Member (IEEE Member)</strong>
                     <span className="badge badge--primary" style={{ marginLeft: '8px', fontSize: '0.65rem' }}>IEEE Discount</span>
                   </td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)' }}>₹7,500</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--color-text-muted)' }}>₹1,350</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--color-ieee-blue)' }}>₹8,850</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-emerald-600)' }}>$110</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif" }}>₹7,500</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", color: 'var(--color-text-muted)' }}>₹1,350</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", fontWeight: 800, color: 'var(--color-ieee-blue)' }}>₹8,850</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", fontWeight: 700, color: 'var(--color-emerald-600)' }}>$110</td>
                   <td style={{ textAlign: 'center' }}>
                     <button
                       type="button"
                       onClick={() => openRegistrationForCategory('PROFESSIONAL_IEEE')}
                       className="btn btn--gold"
-                      style={{ fontSize: '0.75rem', padding: '6px 14px' }}
+                      style={{ fontSize: '0.75rem', padding: '4px 6px' }}
                     >
                       Register Now
                     </button>
@@ -258,16 +258,16 @@ export const RegistrationPage: React.FC = () => {
                   <td>
                     <strong>Student (non-IEEE)</strong>
                   </td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)' }}>₹7,000</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--color-text-muted)' }}>₹1,260</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--color-navy-950)' }}>₹8,260</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-emerald-600)' }}>$100</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif" }}>₹7,000</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", color: 'var(--color-text-muted)' }}>₹1,260</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", fontWeight: 800, color: 'var(--color-navy-950)' }}>₹8,260</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", fontWeight: 700, color: 'var(--color-emerald-600)' }}>$100</td>
                   <td style={{ textAlign: 'center' }}>
                     <button
                       type="button"
                       onClick={() => openRegistrationForCategory('STUDENT_NON_IEEE')}
                       className="btn btn--primary"
-                      style={{ fontSize: '0.75rem', padding: '6px 14px' }}
+                      style={{ fontSize: '0.75rem', padding: '4px 6px' }}
                     >
                       Register Now
                     </button>
@@ -279,16 +279,16 @@ export const RegistrationPage: React.FC = () => {
                     <strong>Student (IEEE Member)</strong>
                     <span className="badge badge--primary" style={{ marginLeft: '8px', fontSize: '0.65rem' }}>IEEE Student Discount</span>
                   </td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)' }}>₹6,500</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--color-text-muted)' }}>₹1,170</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--color-ieee-blue)' }}>₹7,670</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-emerald-600)' }}>$90</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif" }}>₹6,500</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", color: 'var(--color-text-muted)' }}>₹1,170</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", fontWeight: 800, color: 'var(--color-ieee-blue)' }}>₹7,670</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", fontWeight: 700, color: 'var(--color-emerald-600)' }}>$90</td>
                   <td style={{ textAlign: 'center' }}>
                     <button
                       type="button"
                       onClick={() => openRegistrationForCategory('STUDENT_IEEE')}
                       className="btn btn--gold"
-                      style={{ fontSize: '0.75rem', padding: '6px 14px' }}
+                      style={{ fontSize: '0.75rem', padding: '4px 6px' }}
                     >
                       Register Now
                     </button>
@@ -299,16 +299,16 @@ export const RegistrationPage: React.FC = () => {
                   <td>
                     <strong>Attendee (Non-Author)</strong>
                   </td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)' }}>₹3,500</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', color: 'var(--color-text-muted)' }}>₹630</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', fontWeight: 800, color: 'var(--color-navy-950)' }}>₹4,130</td>
-                  <td style={{ textAlign: 'center', fontFamily: 'var(--font-mono)', fontWeight: 700, color: 'var(--color-emerald-600)' }}>$80</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif" }}>₹3,500</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", color: 'var(--color-text-muted)' }}>₹630</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", fontWeight: 800, color: 'var(--color-navy-950)' }}>₹4,130</td>
+                  <td style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", fontWeight: 700, color: 'var(--color-emerald-600)' }}>$80</td>
                   <td style={{ textAlign: 'center' }}>
                     <button
                       type="button"
                       onClick={() => openRegistrationForCategory('ATTENDEE')}
                       className="btn btn--primary"
-                      style={{ fontSize: '0.75rem', padding: '6px 14px' }}
+                      style={{ fontSize: '0.75rem', padding: '4px 6px' }}
                     >
                       Register Now
                     </button>
@@ -330,7 +330,7 @@ export const RegistrationPage: React.FC = () => {
         {/* 2. 8-Step Visual Registration Process Stepper */}
         <div style={{ marginBottom: 'var(--space-10)' }}>
           <div className="section-header" style={{ marginBottom: 'var(--space-4)' }}>
-            <span className="badge badge--primary">Step-by-Step Guide</span>
+            {/* <span className="badge badge--primary">Step-by-Step Guide</span> */}
             <h3 style={{ fontSize: 'var(--text-xl)', color: 'var(--color-navy-950)' }}>
               8-Step Registration Workflow
             </h3>
@@ -477,13 +477,13 @@ export const RegistrationPage: React.FC = () => {
         {/* 4. All 14 ICBDS Registration Policy & Compliance Sections */}
         <div>
           <div className="section-header" style={{ marginBottom: 'var(--space-6)' }}>
-            <span className="badge badge--warning">IEEE Compliance & Institutional Regulations</span>
+            {/* <span className="badge badge--warning">IEEE Compliance & Institutional Regulations</span> */}
             <h3 style={{ fontSize: 'var(--text-2xl)', color: 'var(--color-navy-950)' }}>
               Registration Policies & Compliance Suite (14 Sections)
             </h3>
-            <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-secondary)' }}>
+            {/* <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-secondary)' }}>
               Please review all official policies governing author registration, no-shows, IEEE Xplore submission, taxes, and code of conduct.
-            </p>
+            </p> */}
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
