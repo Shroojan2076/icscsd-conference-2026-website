@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  color: var(--color-navy-900);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: var(--text-4xl); }
+h2 { font-size: var(--text-3xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+h5 { font-size: var(--text-lg); }
+h6 { font-size: var(--text-base); }
+
+p {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.prose {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  line-height: 1.75;
+}
+
+.prose p + p {
+  margin-top: var(--space-4);
+}
+
+.overline {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-ieee-blue);
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.badge--primary {
+  background-color: var(--color-ieee-blue-light);
+  color: var(--color-ieee-blue);
+  border: 1px solid rgba(0, 98, 155, 0.2);
+}
+
+.badge--emerald {
+  background-color: var(--color-emerald-50);
+  color: var(--color-emerald-600);
+  border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
+.badge--gold {
+  background-color: var(--color-accent-gold-light);
+  color: var(--color-accent-gold);
+  border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+.badge--navy {
+  background-color: var(--color-navy-900);
+  color: var(--color-text-inverse);
+}
+
+.badge--crimson {
+  background-color: var(--color-crimson-50);
+  color: var(--color-crimson-600);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}

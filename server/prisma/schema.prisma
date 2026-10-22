@@ -1,0 +1,169 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum DateCategory {
+  PAPER
+  TUTORIAL
+  SPECIAL_SESSION
+  REGISTRATION
+  CONFERENCE
+}
+
+enum CommitteeCategory {
+  PATRON
+  GENERAL_CHAIR
+  GENERAL_CO_CHAIR
+  ADVISORY_COMMITTEE
+  TECHNICAL_PROGRAM_COMMITTEE
+  TUTORIAL_COMMITTEE
+  PUBLICATION_COMMITTEE
+  TREASURER
+}
+
+enum ProposalType {
+  TUTORIAL
+  SPECIAL_SESSION
+}
+
+enum ProposalStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+}
+
+model ConferenceConfig {
+  id                  Int      @id @default(1)
+  conferenceName      String   @default("International Conference on Smart Computing for Sustainable Development")
+  shortName           String   @default("ICSCSD 2026")
+  ieeeRecordNumber    String   @default("67723")
+  isbn                String   @default("979-8-3315-8953-0")
+  instituteName       String   @default("Vishwakarma Institute of Technology, Pune")
+  instituteSubtitle   String   @default("(Autonomous Institute affiliated to Savitribai Phule Pune University)")
+  conferenceDatesText String   @default("25th to 27th November 2026")
+  startDate           DateTime @default("2026-11-25T09:00:00Z")
+  endDate             DateTime @default("2026-11-27T18:00:00Z")
+  cmtSubmissionUrl    String   @default("https://cmt3.research.microsoft.com/ICSCSD2026")
+  cmtGuidelinesUrl    String   @default("https://cmt3.research.microsoft.com/ICSCSD2026")
+  authorGuidelinesUrl String   @default("https://www.ieee.org/conferences/publishing/templates.html")
+  contactEmail        String   @default("viticscsd@gmail.com")
+  tutorialFormUrl     String   @default("https://tinyurl.com/icscsdcallfortutorial")
+  specialSessionUrl   String   @default("https://tinyurl.com/icscsdcallforspecialsession")
+  reviewerFormUrl     String   @default("https://tinyurl.com/icscsdcallforreviewer")
+  vierpStudentUrl     String   @default("https://learner.vierp.in")
+  vierpExternalUrl    String   @default("https://learner.vierp.in/events")
+  aboutConference     String[]
+  aboutInstitute      String[]
+  cmtAcknowledgment   String
+  updatedAt           DateTime @updatedAt
+}
+
+model ImportantDate {
+  id           Int          @id @default(autoincrement())
+  label        String
+  dateText     String
+  isoDate      DateTime?
+  extendedText String?
+  category     DateCategory @default(PAPER)
+  displayOrder Int          @default(0)
+  isActive     Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Track {
+  id          Int          @id @default(autoincrement())
+  trackNumber Int          @unique
+  title       String
+  slug        String       @unique
+  iconName    String       @default("Cpu")
+  topics      TrackTopic[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model TrackTopic {
+  id           Int    @id @default(autoincrement())
+  trackId      Int
+  track        Track  @relation(fields: [trackId], references: [id], onDelete: Cascade)
+  topicText    String
+  displayOrder Int    @default(0)
+}
+
+model CommitteeMember {
+  id                Int               @id @default(autoincrement())
+  fullName          String
+  roleOrAffiliation String
+  category          CommitteeCategory
+  categoryLabel     String
+  displayOrder      Int               @default(0)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@index([category])
+}
+
+model RegistrationTier {
+  id                Int     @id @default(autoincrement())
+  memberCategory    String  @unique
+  indianFeeDisplay  String
+  indianBaseFeeInr  Int
+  gstPercent        Int     @default(18)
+  indianTotalFeeInr Int
+  foreignFeeUsd     Int
+  isIeeeMember      Boolean @default(false)
+  participantType   String
+  displayOrder      Int     @default(0)
+}
+
+model ProposalSubmission {
+  id                 Int            @id @default(autoincrement())
+  proposalType       ProposalType
+  title              String
+  presenterNames     String
+  presenterEmail     String
+  affiliations       String
+  abstract           String
+  objectives         String?
+  intendedAudience   String?
+  outline            String?
+  biography          String?
+  pastAttendeesCount String?
+  speakerWebpageUrl  String?
+  institutionsList   String[]
+  pdfFilePath        String
+  status             ProposalStatus @default(SUBMITTED)
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+}
+
+model PaymentVerification {
+  id                 Int      @id @default(autoincrement())
+  fullName           String
+  email              String
+  cmtPaperId         String?
+  isVitStudent       Boolean  @default(false)
+  prnNumber          String?
+  tierId             Int
+  coAuthorsCount     Int      @default(0)
+  currency           String
+  totalPaidAmount    Int
+  paytmTransactionId String   @unique
+  receiptFilePath    String?
+  verified           Boolean  @default(false)
+  createdAt          DateTime @default(now())
+}
+
+model AdminUser {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  role         String   @default("ADMIN")
+  createdAt    DateTime @default(now())
+}

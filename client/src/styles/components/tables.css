@@ -1,0 +1,97 @@
+/* Academic Tables & Fee Schedule */
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  background-color: var(--color-surface-card);
+  margin-block: var(--space-4);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--text-sm);
+}
+
+.data-table thead tr {
+  background-color: var(--color-navy-950);
+  color: var(--color-text-inverse);
+}
+
+.data-table th {
+  padding: var(--space-4);
+  font-weight: 700;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--color-ieee-blue);
+}
+
+.data-table td {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+  color: var(--color-text-primary);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+/* Specific Fee Table Modifiers */
+.fee-table .fee-table__category {
+  font-weight: 700;
+  color: var(--color-navy-900);
+}
+
+.fee-table .fee-table__amount {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-navy-950);
+}
+
+.fee-table .fee-table__highlight {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  color: var(--color-ieee-blue);
+  background-color: var(--color-ieee-blue-light);
+}
+
+.fee-table .fee-table__usd {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-emerald-600);
+}
+
+/* Tax Breakdown Mini-Table */
+.tax-table {
+  width: 100%;
+  font-size: var(--text-xs);
+}
+
+.tax-table td {
+  padding: var(--space-2) 0;
+  border-bottom: 1px dashed var(--color-border-subtle);
+}
+
+.tax-table td:last-child {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.tax-table tr.tax-table__total td {
+  font-size: var(--text-sm);
+  font-weight: 800;
+  color: var(--color-navy-950);
+  border-top: 2px solid var(--color-border-strong);
+  border-bottom: none;
+  padding-top: var(--space-3);
+}

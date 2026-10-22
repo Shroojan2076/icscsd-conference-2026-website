@@ -1,0 +1,32 @@
+{
+  "name": "icscsd-2026-fullstack",
+  "version": "1.0.0",
+  "description": "Production Full-Stack Web Application for ICSCSD 2026 (VIT Pune) - PERN Stack",
+  "scripts": {
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "dev": "concurrently -n \"SERVER,CLIENT\" -c \"blue,green\" \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "build:server": "npm --prefix server run build",
+    "build:client": "npm --prefix client run build",
+    "build": "npm run build:server && npm run build:client",
+    "prisma:generate": "npm --prefix server run prisma:generate",
+    "prisma:migrate": "npm --prefix server run prisma:migrate",
+    "prisma:seed": "npm --prefix server run prisma:seed"
+  },
+  "keywords": [
+    "ieee",
+    "icscsd-2026",
+    "vit-pune",
+    "conference",
+    "pern-stack",
+    "react",
+    "express",
+    "prisma",
+    "postgresql"
+  ],
+  "author": "VIT Pune - ICSCSD 2026 Organizers",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

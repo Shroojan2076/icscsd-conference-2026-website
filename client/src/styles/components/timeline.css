@@ -1,0 +1,80 @@
+/* Important Dates Timeline (ICBDS Style) */
+
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.timeline-card {
+  background-color: var(--color-surface-card);
+  border: 1px solid var(--color-border-subtle);
+  border-left: 4px solid var(--color-ieee-blue);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-3);
+  transition: all var(--transition-fast);
+}
+
+.timeline-card:hover {
+  transform: translateX(4px);
+  border-left-color: var(--color-emerald-600);
+  box-shadow: var(--shadow-md);
+}
+
+.timeline-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.timeline-card__badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.timeline-card__badge--active {
+  background-color: var(--color-emerald-50);
+  color: var(--color-emerald-600);
+  border: 1px solid rgba(5, 150, 105, 0.3);
+}
+
+.timeline-card__badge--extended {
+  background-color: var(--color-accent-gold-light);
+  color: var(--color-accent-gold);
+  border: 1px solid rgba(217, 119, 6, 0.3);
+}
+
+.timeline-card__badge--closed {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.timeline-card__label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-navy-950);
+  line-height: 1.35;
+}
+
+.timeline-card__date {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  color: var(--color-ieee-blue);
+}
+
+.timeline-card__note {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}

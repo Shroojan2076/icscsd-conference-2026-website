@@ -1,0 +1,160 @@
+/* Policy Callout Blocks, Warnings, Accordions & Steppers */
+
+.policy-card {
+  background-color: var(--color-surface-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  margin-bottom: var(--space-4);
+  box-shadow: var(--shadow-xs);
+}
+
+.policy-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.policy-card__title {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-navy-950);
+}
+
+.policy-card__body {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+}
+
+/* Warning & Alert Callouts */
+.alert-box {
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  margin-block: var(--space-4);
+}
+
+.alert-box--warning {
+  background-color: var(--color-accent-gold-light);
+  border: 1px solid rgba(217, 119, 6, 0.3);
+  color: #78350f;
+}
+
+.alert-box--danger {
+  background-color: var(--color-crimson-50);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  color: #991b1b;
+}
+
+.alert-box--info {
+  background-color: var(--color-ieee-blue-light);
+  border: 1px solid rgba(0, 98, 155, 0.3);
+  color: #075985;
+}
+
+.alert-box--success {
+  background-color: var(--color-emerald-50);
+  border: 1px solid rgba(5, 150, 105, 0.3);
+  color: #065f46;
+}
+
+/* Accordion (ICBDS 14 Policies Style) */
+.accordion {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-3);
+  background-color: var(--color-surface-card);
+}
+
+.accordion__header {
+  width: 100%;
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-bg-primary);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-navy-900);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  text-align: left;
+}
+
+.accordion__header:hover {
+  background-color: var(--color-bg-secondary);
+}
+
+.accordion__body {
+  padding: var(--space-5);
+  border-top: 1px solid var(--color-border-subtle);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  background-color: var(--color-bg-secondary);
+}
+
+/* 8-Step Stepper */
+.stepper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
+  margin-block: var(--space-6);
+}
+
+.step-card {
+  background-color: var(--color-surface-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  gap: var(--space-3);
+  box-shadow: var(--shadow-xs);
+}
+
+.step-card__number {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-navy-900);
+  color: var(--color-text-inverse);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-card__content h4 {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-navy-950);
+  margin-bottom: 2px;
+}
+
+.step-card__content p {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+/* 5-Line Author Affiliation Visual Example Box */
+.affiliation-box {
+  background-color: #1e293b;
+  color: #f8fafc;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--color-accent-gold);
+  line-height: 1.8;
+  margin-block: var(--space-4);
+}
