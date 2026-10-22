@@ -28,41 +28,10 @@
 
 .footer-partners-bar__logos {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: var(--space-4);
-}
-
-.footer-partners-bar__item {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 48px;
-  padding: 6px 16px;
-  border-radius: var(--radius-sm);
-  box-sizing: border-box;
-  flex-shrink: 0;
-}
-
-.footer-partners-bar__item--light {
-  background-color: #ffffff;
-}
-
-.footer-partners-bar__item--dark {
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.footer-partners-bar__item img,
-.footer-partners-bar__logos img {
-  height: 34px;
-  max-height: 34px;
-  width: auto;
-  max-width: 260px;
-  object-fit: contain;
-  display: block;
+  gap: var(--space-8);
 }
 
 .footer-grid {

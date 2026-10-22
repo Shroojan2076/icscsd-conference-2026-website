@@ -69,24 +69,24 @@ export const AccommodationPage: React.FC = () => {
         {/* Hotels Near Venue Grid */}
         <div style={{ marginBottom: 'var(--space-12)' }}>
           <div className="section-header">
-            {/* <span className="badge badge--primary">Hospitality Partners</span> */}
+            <span className="badge badge--primary">Hospitality Partners</span>
             <h3 style={{ fontSize: 'var(--text-2xl)', color: 'var(--color-navy-950)' }}>
               Recommended Hotels Near Venue
             </h3>
             <p style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-secondary)' }}>
-              Road distances calculated directly relative to the VIT Pune campus Bibwewadi. Delegates are encouraged to book early to avail discounted academic tariffs.
+              Road distances calculated directly relative to the VIT Pune campus in Bibwewadi. Delegates are encouraged to book early to avail discounted academic tariffs.
             </p>
           </div>
 
           <div className="grid-3" style={{ gap: 'var(--space-6)' }}>
             {hotels.map((h, idx) => (
               <div key={h.id || idx} className="hotel-card">
-                <img src={h.photoUrl} alt={h.name} className="hotel-card__image" />
+                <img src={h.imageUrl} alt={h.name} className="hotel-card__image" />
                 <div className="hotel-card__content">
                   <div>
                     <span className="hotel-card__distance">
                       <MapPin size={12} />
-                      <span>VIT Campus ~{h.distanceKm} km</span>
+                      <span>VIT Campus ~{h.distanceFromVitKm} km</span>
                     </span>
                     <h4 className="hotel-card__title">{h.name}</h4>
                     <p className="hotel-card__location">{h.locationArea}</p>
@@ -133,11 +133,11 @@ export const AccommodationPage: React.FC = () => {
           <div className="grid-3" style={{ gap: 'var(--space-6)' }}>
             {attractions.map((att, idx) => (
               <div key={att.id || idx} className="attraction-card">
-                <img src={att.photoUrl} alt={att.title} className="attraction-card__image" />
+                <img src={att.imageUrl} alt={att.title} className="attraction-card__image" />
                 <div className="attraction-card__content">
                   <span className="hotel-card__distance" style={{ marginBottom: '8px' }}>
                     <MapPin size={12} />
-                    <span>VIT Campus ~{att.distanceKm} km</span>
+                    <span>VIT Campus ~{att.distanceFromVitKm} km</span>
                   </span>
                   <h4 style={{ fontSize: 'var(--text-base)', color: 'var(--color-navy-950)', fontWeight: 700, marginBottom: '6px' }}>
                     {att.title}

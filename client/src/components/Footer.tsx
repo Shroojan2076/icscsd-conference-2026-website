@@ -1,4 +1,4 @@
-  import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { VitLogo, BractLogo, IeeeLogo } from './LogoSvg';
 import {
@@ -27,14 +27,24 @@ export const Footer: React.FC = () => {
             Organizing Institute & Technical Co-Sponsors
           </span>
           <div className="footer-partners-bar__logos">
-            <div className="footer-partners-bar__item footer-partners-bar__item--light">
-              <BractLogo style={{ height: '34px', width: 'auto', maxHeight: '34px' }} />
-            </div>
-            <div className="footer-partners-bar__item footer-partners-bar__item--dark">
-              <VitLogo style={{ height: '34px', width: 'auto', maxHeight: '34px' }} />
-            </div>
-            <div className="footer-partners-bar__item footer-partners-bar__item--light">
-              <IeeeLogo style={{ height: '34px', width: 'auto', maxHeight: '34px' }} />
+            <BractLogo className="h-10 w-auto" />
+            <VitLogo className="h-14 w-auto" />
+            <IeeeLogo className="h-12 w-auto" />
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '6px 14px',
+                borderRadius: 'var(--radius-sm)',
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                color: 'var(--color-border-strong)',
+                fontSize: '0.8rem'
+              }}
+            >
+              <Lock size={14} style={{ color: 'var(--color-accent-gold)' }} />
+              <span>Peer Review via <strong>Microsoft CMT</strong></span>
             </div>
           </div>
         </div>
