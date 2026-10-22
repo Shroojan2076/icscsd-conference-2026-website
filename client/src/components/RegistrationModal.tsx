@@ -229,9 +229,9 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
         <div className="modal-header">
           <div>
             <h3>ICSCSD 2026 Registration Checkout</h3>
-            <span style={{ fontSize: '0.75rem', color: '#93c5fd' }}>
+            {/* <span style={{ fontSize: '0.75rem', color: '#93c5fd' }}>
               IEEE Record #67723 · Razorpay Secure Gateway
-            </span>
+            </span> */}
           </div>
           <button
             type="button"
@@ -433,9 +433,9 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     onChange={e => setIeeeNumber(e.target.value)}
                     required
                   />
-                  <div className="form-hint">
+                  {/* <div className="form-hint">
                     Note: Invalid or inactive IEEE credentials will trigger mandatory fee-difference reclassification per ICBDS/IEEE compliance.
-                  </div>
+                  </div> */}
                 </div>
               )}
 
