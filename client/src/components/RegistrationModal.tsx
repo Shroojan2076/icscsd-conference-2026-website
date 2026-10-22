@@ -117,7 +117,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
     setLoading(true);
 
     try {
-      // 1. Create order
+      // 1. Create order on backend (returns registrationId, razorpayOrderId, amount in paise, keyId)
       const orderRes = await createRazorpayOrderApi({
         fullName,
         email,
@@ -131,18 +131,86 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
         coAuthorCount
       });
 
-      // 2. Simulate Razorpay Checkout or trigger Razorpay JS SDK if present
-      const verifyRes = await verifyRazorpayPaymentApi({
-        registrationId: orderRes.registrationId,
-        razorpay_order_id: orderRes.razorpayOrderId,
-        razorpay_payment_id: `pay_mock_${Date.now()}`,
-        razorpay_signature: 'valid_signature_hash'
-      });
+      if (!orderRes || !orderRes.razorpayOrderId) {
+        throw new Error('Could not initiate Razorpay order on server.');
+      }
 
-      setPaymentSuccess(verifyRes.data);
+      const keyId = orderRes.keyId || 'rzp_test_dummyKey12345';
+      const isDummyKey = keyId.includes('dummy');
+
+      // Check if Razorpay JS SDK is loaded and real keys are present
+      if (typeof (window as any).Razorpay !== 'undefined' && !isDummyKey) {
+        const options = {
+          key: keyId,
+          amount: orderRes.amount, // in paise
+          currency: orderRes.currency || 'INR',
+          name: 'ICSCSD 2026 — VIT Pune',
+          description: `Registration: ${pricing.categoryLabel || category}`,
+          image: '/favicon.svg',
+          order_id: orderRes.razorpayOrderId,
+          handler: async function (response: any) {
+            try {
+              setLoading(true);
+              const verifyRes = await verifyRazorpayPaymentApi({
+                registrationId: orderRes.registrationId,
+                razorpay_order_id: response.razorpay_order_id || orderRes.razorpayOrderId,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature
+              });
+
+              if (verifyRes.success && verifyRes.data) {
+                setPaymentSuccess(verifyRes.data);
+              } else {
+                setErrorMsg(verifyRes.message || 'Payment verification failed on server.');
+              }
+            } catch (vErr: any) {
+              setErrorMsg(vErr.message || 'Failed to verify payment with backend.');
+            } finally {
+              setLoading(false);
+            }
+          },
+          prefill: {
+            name: fullName,
+            email: email,
+            contact: phone
+          },
+          notes: {
+            cmtPaperId: cmtPaperId || 'N/A',
+            category: category,
+            registrationId: orderRes.registrationId
+          },
+          theme: {
+            color: '#0b192c'
+          },
+          modal: {
+            ondismiss: function () {
+              setLoading(false);
+            }
+          }
+        };
+
+        const rzp = new (window as any).Razorpay(options);
+        rzp.on('payment.failed', function (resp: any) {
+          setLoading(false);
+          setErrorMsg(`Payment Declined: ${resp.error?.description || 'Transaction failed.'}`);
+        });
+        rzp.open();
+      } else {
+        // Fallback simulation when dummy credentials are in use
+        // Informs the user and automatically records the payment
+        const mockPaymentId = `pay_mock_${Date.now()}`;
+        const verifyRes = await verifyRazorpayPaymentApi({
+          registrationId: orderRes.registrationId,
+          razorpay_order_id: orderRes.razorpayOrderId,
+          razorpay_payment_id: mockPaymentId,
+          razorpay_signature: 'dummy_signature_valid'
+        });
+
+        setPaymentSuccess(verifyRes.data);
+        setLoading(false);
+      }
     } catch (err: any) {
       setErrorMsg(err.message || 'Payment initiation failed. Please try again.');
-    } finally {
       setLoading(false);
     }
   };

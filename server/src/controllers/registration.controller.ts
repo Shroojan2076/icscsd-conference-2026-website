@@ -107,6 +107,9 @@ export const verifyPayment = async (req: Request, res: Response) => {
 
 import { calculateRegistrationPricing } from '../services/pricingService';
 import { generateReceiptPdf } from '../services/pdfGeneratorService';
+import Razorpay from 'razorpay';
+import crypto from 'crypto';
+import { env } from '../config/env';
 
 export const calculatePricing = async (req: Request, res: Response) => {
   try {
@@ -155,7 +158,43 @@ export const createRazorpayOrder = async (req: Request, res: Response) => {
     });
 
     const registrationId = `REG-ICSCSD2026-${Date.now().toString().slice(-6)}`;
-    const razorpayOrderId = `order_${Math.random().toString(36).substring(2, 12)}`;
+    const keyId = process.env.RAZORPAY_KEY_ID || env.RAZORPAY_KEY_ID;
+    const keySecret = process.env.RAZORPAY_KEY_SECRET || env.RAZORPAY_KEY_SECRET;
+
+    // Amount in subunits (paise for INR, cents for USD)
+    const amountInSubunits = Math.round(pricing.totalPayable * 100);
+    const currency = pricing.currency === 'USD' ? 'USD' : 'INR';
+
+    let razorpayOrderId: string = '';
+
+    // Attempt actual Razorpay order creation via SDK
+    try {
+      if (!keyId.includes('dummy') && !keySecret.includes('dummy')) {
+        const razorpay = new Razorpay({
+          key_id: keyId,
+          key_secret: keySecret
+        });
+
+        const rzpOrder = await razorpay.orders.create({
+          amount: amountInSubunits,
+          currency: currency,
+          receipt: registrationId,
+          notes: {
+            fullName,
+            email,
+            category,
+            cmtPaperId: cmtPaperId || 'N/A'
+          }
+        });
+        razorpayOrderId = rzpOrder.id;
+      } else {
+        // Dummy credentials mode: simulate order ID
+        razorpayOrderId = `order_${Math.random().toString(36).substring(2, 14)}`;
+      }
+    } catch (rzpErr: any) {
+      console.warn('Razorpay SDK order creation note (falling back to simulated order ID):', rzpErr?.error?.description || rzpErr?.message || rzpErr);
+      razorpayOrderId = `order_${Math.random().toString(36).substring(2, 14)}`;
+    }
 
     const orderRecord = {
       registrationId,
@@ -183,9 +222,10 @@ export const createRazorpayOrder = async (req: Request, res: Response) => {
       data: {
         registrationId,
         razorpayOrderId,
-        amount: pricing.totalPayable,
-        currency: pricing.currency,
-        keyId: process.env.RAZORPAY_KEY_ID || 'rzp_test_icscsd2026_demo',
+        amount: amountInSubunits, // passed in paise/cents to Razorpay checkout
+        displayAmount: pricing.totalPayable,
+        currency: currency,
+        keyId: keyId,
         pricing
       }
     });
@@ -197,6 +237,29 @@ export const createRazorpayOrder = async (req: Request, res: Response) => {
 export const verifyRazorpayPayment = async (req: Request, res: Response) => {
   try {
     const { registrationId, razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+
+    const keyId = process.env.RAZORPAY_KEY_ID || env.RAZORPAY_KEY_ID;
+    const keySecret = process.env.RAZORPAY_KEY_SECRET || env.RAZORPAY_KEY_SECRET;
+
+    // HMAC-SHA256 Cryptographic Signature Verification
+    let isSignatureValid = false;
+    if (razorpay_order_id && razorpay_payment_id && razorpay_signature) {
+      const generatedSignature = crypto
+        .createHmac('sha256', keySecret)
+        .update(`${razorpay_order_id}|${razorpay_payment_id}`)
+        .digest('hex');
+      isSignatureValid = (generatedSignature === razorpay_signature);
+    }
+
+    const isDummyCredentials = keyId.includes('dummy') || keySecret.includes('dummy');
+
+    // Strict verification when real credentials are present
+    if (!isSignatureValid && !isDummyCredentials) {
+      return res.status(400).json({
+        success: false,
+        message: 'Cryptographic signature verification failed. Payment cannot be verified.'
+      });
+    }
 
     const order = FallbackStore.razorpayOrders.find(
       r => r.registrationId === registrationId || r.razorpayOrderId === razorpay_order_id
@@ -232,3 +295,4 @@ export const verifyRazorpayPayment = async (req: Request, res: Response) => {
     return res.status(500).json({ success: false, message: err.message });
   }
 };
+
