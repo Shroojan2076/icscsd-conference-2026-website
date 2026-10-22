@@ -19,45 +19,43 @@
 }
 
 /* Numbered Track Cards (ICBDS Style) */
+
 .track-card {
-  background-color: var(--color-surface-card);
+  background: var(--color-surface-card);
   border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-lg);
+  border-radius: 10px;
   padding: var(--space-6);
   box-shadow: var(--shadow-sm);
-  transition: all var(--transition-normal);
-  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .track-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-  border-color: var(--color-ieee-blue);
 }
 
 .track-card__header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--space-4);
+  margin-bottom: 18px;
 }
 
 .track-card__number {
-  font-family: var(--font-mono);
-  font-size: var(--text-2xl);
-  font-weight: 800;
+  font-family: var(--font-sans);
+  font-size: 1.6rem;
+  font-weight: 600;
   color: var(--color-ieee-blue);
-  line-height: 1;
+  line-height: 1.2;
 }
 
 .track-card__icon-wrapper {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  background-color: var(--color-ieee-blue-light);
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--color-ieee-blue-light);
   color: var(--color-ieee-blue);
   display: flex;
   align-items: center;
@@ -65,35 +63,36 @@
 }
 
 .track-card__title {
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: var(--color-navy-950);
-  margin-bottom: var(--space-3);
-  line-height: 1.35;
+  margin-bottom: 12px;
+  line-height: 1.4;
 }
 
 .track-card__topics {
-  margin-top: var(--space-2);
-  margin-bottom: var(--space-4);
+  margin-top: 4px;
+  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 8px;
 }
 
 .track-card__topic-item {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-2);
-  font-size: var(--text-xs);
+  gap: 8px;
+  font-size: var(--text-sm);
   color: var(--color-text-secondary);
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .track-card__topic-bullet {
   color: var(--color-emerald-600);
-  font-weight: bold;
+  font-weight: 600;
   margin-top: 1px;
 }
+
 
 /* Chief Patrons & Leadership Profile Cards */
 .patron-card {
