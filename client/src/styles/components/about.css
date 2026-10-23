@@ -1,0 +1,14 @@
+.about-institution__logo {
+  display: block;
+  width: auto;
+  height: 64px;
+  flex: 0 0 auto;
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+}
+
+@media (max-width: 480px) {
+  .about-institution__logo {
+    height: 52px;
+  }
+}
