@@ -8,6 +8,27 @@ interface RegistrationModalProps {
   defaultCategory?: string;
 }
 
+const loadRazorpayScript = (): Promise<boolean> => {
+  return new Promise((resolve) => {
+    if (typeof (window as any).Razorpay !== 'undefined') {
+      return resolve(true);
+    }
+    const existing = document.getElementById('razorpay-checkout-script');
+    if (existing) {
+      existing.addEventListener('load', () => resolve(true));
+      existing.addEventListener('error', () => resolve(false));
+      return;
+    }
+    const script = document.createElement('script');
+    script.id = 'razorpay-checkout-script';
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
+
 export const RegistrationModal: React.FC<RegistrationModalProps> = ({
   isOpen,
   onClose,
@@ -117,7 +138,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
     setLoading(true);
 
     try {
-      // 1. Create order on backend (returns registrationId, razorpayOrderId, amount in paise, keyId)
+      // 1. Create order on backend with Razorpay API
       const orderRes = await createRazorpayOrderApi({
         fullName,
         email,
@@ -132,83 +153,74 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
       });
 
       if (!orderRes || !orderRes.razorpayOrderId) {
-        throw new Error('Could not initiate Razorpay order on server.');
+        throw new Error('Failed to create Razorpay payment order on server.');
       }
 
-      const keyId = orderRes.keyId || 'rzp_test_dummyKey12345';
-      const isDummyKey = keyId.includes('dummy');
+      // 2. Ensure Razorpay Checkout script is loaded
+      const isLoaded = await loadRazorpayScript();
+      if (!isLoaded || typeof (window as any).Razorpay === 'undefined') {
+        throw new Error('Razorpay Checkout SDK could not be loaded. Please check your internet connection.');
+      }
 
-      // Check if Razorpay JS SDK is loaded and real keys are present
-      if (typeof (window as any).Razorpay !== 'undefined' && !isDummyKey) {
-        const options = {
-          key: keyId,
-          amount: orderRes.amount, // in paise
-          currency: orderRes.currency || 'INR',
-          name: 'ICSCSD 2026 — VIT Pune',
-          description: `Registration: ${pricing.categoryLabel || category}`,
-          image: '/favicon.svg',
-          order_id: orderRes.razorpayOrderId,
-          handler: async function (response: any) {
-            try {
-              setLoading(true);
-              const verifyRes = await verifyRazorpayPaymentApi({
-                registrationId: orderRes.registrationId,
-                razorpay_order_id: response.razorpay_order_id || orderRes.razorpayOrderId,
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature
-              });
+      // 3. Configure Razorpay Checkout options
+      const options = {
+        key: orderRes.keyId,
+        amount: orderRes.amount, // in paise (e.g. 902700 for ₹9,027.00)
+        currency: orderRes.currency || 'INR',
+        name: 'ICSCSD 2026 — VIT Pune',
+        description: `Registration: ${pricing.categoryLabel || category}`,
+        image: '/favicon.svg',
+        order_id: orderRes.razorpayOrderId,
+        handler: async function (response: any) {
+          // This callback runs ONLY after payment succeeds inside the Razorpay popup
+          try {
+            setLoading(true);
+            const verifyRes = await verifyRazorpayPaymentApi({
+              registrationId: orderRes.registrationId,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature
+            });
 
-              if (verifyRes.success && verifyRes.data) {
-                setPaymentSuccess(verifyRes.data);
-              } else {
-                setErrorMsg(verifyRes.message || 'Payment verification failed on server.');
-              }
-            } catch (vErr: any) {
-              setErrorMsg(vErr.message || 'Failed to verify payment with backend.');
-            } finally {
-              setLoading(false);
+            if (verifyRes.success && verifyRes.data) {
+              setPaymentSuccess(verifyRes.data);
+            } else {
+              setErrorMsg(verifyRes.message || 'Payment verification failed on server.');
             }
-          },
-          prefill: {
-            name: fullName,
-            email: email,
-            contact: phone
-          },
-          notes: {
-            cmtPaperId: cmtPaperId || 'N/A',
-            category: category,
-            registrationId: orderRes.registrationId
-          },
-          theme: {
-            color: '#0b192c'
-          },
-          modal: {
-            ondismiss: function () {
-              setLoading(false);
-            }
+          } catch (vErr: any) {
+            setErrorMsg(vErr.message || 'Payment verification failed on server.');
+          } finally {
+            setLoading(false);
           }
-        };
+        },
+        prefill: {
+          name: fullName,
+          email: email,
+          contact: phone
+        },
+        notes: {
+          cmtPaperId: cmtPaperId || 'N/A',
+          category: category,
+          registrationId: orderRes.registrationId
+        },
+        theme: {
+          color: '#0b192c'
+        },
+        modal: {
+          ondismiss: function () {
+            setLoading(false);
+          }
+        }
+      };
 
-        const rzp = new (window as any).Razorpay(options);
-        rzp.on('payment.failed', function (resp: any) {
-          setLoading(false);
-          setErrorMsg(`Payment Declined: ${resp.error?.description || 'Transaction failed.'}`);
-        });
-        rzp.open();
-      } else {
-        // Fallback simulation when dummy credentials are in use
-        // Informs the user and automatically records the payment
-        const mockPaymentId = `pay_mock_${Date.now()}`;
-        const verifyRes = await verifyRazorpayPaymentApi({
-          registrationId: orderRes.registrationId,
-          razorpay_order_id: orderRes.razorpayOrderId,
-          razorpay_payment_id: mockPaymentId,
-          razorpay_signature: 'dummy_signature_valid'
-        });
-
-        setPaymentSuccess(verifyRes.data);
+      const razorpayInstance = new (window as any).Razorpay(options);
+      razorpayInstance.on('payment.failed', function (failureResponse: any) {
         setLoading(false);
-      }
+        setErrorMsg(`Payment Declined: ${failureResponse.error?.description || 'Transaction failed.'}`);
+      });
+
+      setLoading(false);
+      razorpayInstance.open();
     } catch (err: any) {
       setErrorMsg(err.message || 'Payment initiation failed. Please try again.');
       setLoading(false);
@@ -229,9 +241,9 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
         <div className="modal-header">
           <div>
             <h3>ICSCSD 2026 Registration Checkout</h3>
-            <span style={{ fontSize: '0.75rem', color: '#93c5fd' }}>
+            {/* <span style={{ fontSize: '0.75rem', color: '#93c5fd' }}>
               IEEE Record #67723 · Razorpay Secure Gateway
-            </span>
+            </span> */}
           </div>
           <button
             type="button"
@@ -433,9 +445,9 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     onChange={e => setIeeeNumber(e.target.value)}
                     required
                   />
-                  <div className="form-hint">
+                  {/* <div className="form-hint">
                     Note: Invalid or inactive IEEE credentials will trigger mandatory fee-difference reclassification per ICBDS/IEEE compliance.
-                  </div>
+                  </div> */}
                 </div>
               )}
 

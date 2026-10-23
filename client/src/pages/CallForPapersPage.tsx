@@ -37,9 +37,6 @@ export const CallForPapersPage: React.FC = () => {
       {/* Top Breadcrumb & Hero Banner */}
       <section className="section section--dark" style={{ paddingBlock: 'var(--space-10)' }}>
         <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <span className="badge badge--primary" style={{ alignSelf: 'flex-start' }}>
-            IEEE Conference Record #67723 · ISBN 979-8-3315-8953-0
-          </span>
           <h1 style={{ fontSize: 'var(--text-3xl)', color: '#ffffff' }}>
             Call For Papers & Research Tracks
           </h1>
@@ -70,7 +67,11 @@ export const CallForPapersPage: React.FC = () => {
               <h2 style={{ fontSize: 'var(--text-xl)', color: 'var(--color-navy-950)', marginBottom: '4px' }}>
                 Explore 9 Research Tracks & 36 Sub-Topics
               </h2>
-              <p style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-secondary)' }}>
+              <p style={{
+  fontSize: 'var(--text-xs)',
+  color: 'var(--color-text-secondary)',
+  fontWeight: 700,
+}}>
                 Filter research domains or search for key technologies like AI, 6G, IoT, smart grid, or biomedical robotics.
               </p>
             </div>
@@ -98,9 +99,6 @@ export const CallForPapersPage: React.FC = () => {
                   <span className="track-card__number">
                     {String(track.trackNumber).padStart(2, '0')}
                   </span>
-                  <div className="track-card__icon-wrapper">
-                    {getTrackIcon(track.trackNumber)}
-                  </div>
                 </div>
 
                 <h3 className="track-card__title">
