@@ -97,7 +97,7 @@ export const HomePage: React.FC = () => {
         <div className="container hero__content">
           <div className="hero__record-badge">
             <Award size={14} style={{ color: 'var(--color-accent-gold)' }} />
-            <span>IEEE Conference Record #67723 · ISBN: 979-8-3315-8953-0</span>
+            <span>IEEE Conference Record #{config.ieeeRecordNumber} · ISBN: {config.isbn}</span>
           </div>
 
           <h1 className="hero__headline">
@@ -113,7 +113,7 @@ export const HomePage: React.FC = () => {
             </span>
             <span className="hero__pill">
               <MapPin size={14} />
-              <span>VIT, Pune, India</span>
+              <span>VIT Pune, Bibwewadi Campus</span>
             </span>
             <span className="hero__pill">
               <Compass size={14} />
@@ -174,7 +174,7 @@ export const HomePage: React.FC = () => {
             <div className="stat-card__label">Flagship Edition of ICSCSD</div>
           </div>
           <div className="stat-card">
-            <div className="stat-card__number">09</div>
+            <div className="stat-card__number">{String(tracks.length).padStart(2, '0')}</div>
             <div className="stat-card__label">Cutting-Edge Research Tracks</div>
           </div>
           <div className="stat-card">
@@ -183,7 +183,7 @@ export const HomePage: React.FC = () => {
           </div>
           <div className="stat-card">
             <div className="stat-card__number">IEEE Xplore</div>
-            <div className="stat-card__label">Record #67723 · ISBN 979-8-3315-8953-0</div>
+            <div className="stat-card__label">Indexed proceedings · Record #{config.ieeeRecordNumber}</div>
           </div>
         </div>
       </section>
@@ -251,6 +251,15 @@ export const HomePage: React.FC = () => {
                   <CheckCircle2 size={18} style={{ color: 'var(--color-emerald-600)', flexShrink: 0 }} />
                   <span>IEEE Xplore Indexing</span>
                 </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px', marginTop: 'var(--space-6)', paddingTop: 'var(--space-5)', borderTop: '1px solid var(--color-border-subtle)' }}>
+                <div><span style={{ color: 'var(--color-text-muted)', fontSize: 'var(--text-xs)' }}>Conference dates</span><br /><strong>November 25–27, 2026</strong></div>
+                <div><span style={{ color: 'var(--color-text-muted)', fontSize: 'var(--text-xs)' }}>Venue</span><br /><strong>VIT Pune, Bibwewadi</strong></div>
+                <div><span style={{ color: 'var(--color-text-muted)', fontSize: 'var(--text-xs)' }}>Format</span><br /><strong>Hybrid</strong></div>
+                <div><span style={{ color: 'var(--color-text-muted)', fontSize: 'var(--text-xs)' }}>IEEE record</span><br /><strong>#{config.ieeeRecordNumber}</strong></div>
+                <div><span style={{ color: 'var(--color-text-muted)', fontSize: 'var(--text-xs)' }}>ISBN</span><br /><strong>{config.isbn}</strong></div>
+                <div><span style={{ color: 'var(--color-text-muted)', fontSize: 'var(--text-xs)' }}>Paper length</span><br /><strong>4–6 pages</strong></div>
               </div>
             </div>
 
@@ -348,7 +357,58 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 6. Important Dates Timeline (ICBDS Style) */}
+      {/* 6. Author Submission Steps */}
+      <section id="authors" className="section">
+        <div className="container">
+          <div className="section-header section-header--center">
+            <span className="badge badge--primary">For Authors</span>
+            <h2 style={{ fontSize: 'var(--text-3xl)', color: 'var(--color-navy-950)' }}>
+              Submit Your Work
+            </h2>
+            <p>
+              Submit original research through Microsoft CMT, prepare your accepted paper for IEEE Xplore, or propose a tutorial or special session.
+            </p>
+          </div>
+
+          <div className="grid-3">
+            <div className="card">
+              <div className="track-card__icon-wrapper"><Send size={20} /></div>
+              <h3 style={{ fontSize: 'var(--text-lg)', color: 'var(--color-navy-950)', margin: 'var(--space-4) 0 var(--space-2)' }}>Submit your paper</h3>
+              <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--text-sm)', lineHeight: '1.6', marginBottom: 'var(--space-4)' }}>
+                Upload your original manuscript to Microsoft CMT for peer review.
+              </p>
+              <a href={config.cmtSubmissionUrl} target="_blank" rel="noreferrer" className="btn btn--outline" style={{ alignSelf: 'flex-start' }}>
+                <span>Open Microsoft CMT</span><ExternalLink size={13} />
+              </a>
+            </div>
+
+            <div className="card">
+              <div className="track-card__icon-wrapper"><ShieldCheck size={20} /></div>
+              <h3 style={{ fontSize: 'var(--text-lg)', color: 'var(--color-navy-950)', margin: 'var(--space-4) 0 var(--space-2)' }}>Camera-ready submission</h3>
+              <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--text-sm)', lineHeight: '1.6', marginBottom: 'var(--space-4)' }}>
+                Accepted papers must be 4–6 pages with similarity below 10%. Check the required ZIP package and submit it through the camera-ready portal.
+              </p>
+              <Link to="/camera-ready-submission" className="btn btn--outline" style={{ alignSelf: 'flex-start' }}>
+                <span>Camera-ready guidelines</span><ChevronRight size={15} />
+              </Link>
+            </div>
+
+            <div className="card">
+              <div className="track-card__icon-wrapper"><BookOpen size={20} /></div>
+              <h3 style={{ fontSize: 'var(--text-lg)', color: 'var(--color-navy-950)', margin: 'var(--space-4) 0 var(--space-2)' }}>Tutorials & special sessions</h3>
+              <p style={{ color: 'var(--color-text-secondary)', fontSize: 'var(--text-sm)', lineHeight: '1.6', marginBottom: 'var(--space-4)' }}>
+                Share your expertise by submitting a proposal for a pre-conference tutorial or special session.
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
+                <Link to="/call-for-tutorials" style={{ color: 'var(--color-ieee-blue)', fontWeight: 700 }}>Propose a tutorial <ArrowRight size={13} /></Link>
+                <Link to="/call-for-special-sessions" style={{ color: 'var(--color-ieee-blue)', fontWeight: 700 }}>Propose a session <ArrowRight size={13} /></Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Important Dates Timeline (ICBDS Style) */}
       <section id="important-dates" className="section section--alt">
         <div className="container">
           <div className="section-header section-header--center">
@@ -460,7 +520,47 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 7. Chief Patrons & Leadership Preview Grid */}
+      {/* 8. Registration Overview */}
+      <section id="register" className="section section--alt">
+        <div className="container">
+          <div className="grid-2" style={{ gap: 'var(--space-10)', alignItems: 'center' }}>
+            <div>
+              <span className="badge badge--warning">Registration</span>
+              <h2 style={{ fontSize: 'var(--text-3xl)', color: 'var(--color-navy-950)', margin: 'var(--space-3) 0' }}>
+                Register for ICSCSD 2026
+              </h2>
+              <p style={{ color: 'var(--color-text-secondary)', lineHeight: '1.7', marginBottom: 'var(--space-5)' }}>
+                Review the fee schedule and policies, then complete registration securely. The registration flow calculates your total and supports GST invoices; paid international delegates can request a visa support letter.
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
+                <Link to="/registration" className="btn btn--primary">
+                  <FileText size={15} /><span>Fees & registration</span><ChevronRight size={15} />
+                </Link>
+                <Link to="/author" className="btn btn--outline">
+                  <span>Invoices & visa letters</span><ArrowRight size={15} />
+                </Link>
+              </div>
+            </div>
+
+            <div className="card" style={{ gap: '0' }}>
+              <div style={{ padding: 'var(--space-4) 0', borderBottom: '1px solid var(--color-border-subtle)' }}>
+                <span style={{ color: 'var(--color-text-muted)' }}>Indian registration tax</span>
+                <strong style={{ display: 'block', color: 'var(--color-navy-950)' }}>18% GST (9% CGST + 9% SGST)</strong>
+              </div>
+              <div style={{ padding: 'var(--space-4) 0', borderBottom: '1px solid var(--color-border-subtle)' }}>
+                <span style={{ color: 'var(--color-text-muted)' }}>In-person co-author add-on</span>
+                <strong style={{ display: 'block', color: 'var(--color-navy-950)' }}>₹{data.coAuthorAddonFeeInr.toLocaleString('en-IN')} + GST</strong>
+              </div>
+              <div style={{ padding: 'var(--space-4) 0' }}>
+                <span style={{ color: 'var(--color-text-muted)' }}>Online payment convenience fee</span>
+                <strong style={{ display: 'block', color: 'var(--color-navy-950)' }}>2% for Razorpay checkout</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 9. Chief Patrons & Leadership Preview Grid */}
       <section className="section">
         <div className="container">
           <div className="section-header section-header--center">
