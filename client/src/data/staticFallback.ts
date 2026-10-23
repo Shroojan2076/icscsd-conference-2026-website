@@ -180,20 +180,24 @@ export const staticFallbackData: BootstrapResponse = {
     reviewerFormUrl: "https://tinyurl.com/icscsdcallforreviewer",
     vierpStudentUrl: "https://learner.vierp.in",
     vierpExternalUrl: "https://learner.vierp.in/events",
-    aboutConference: [
-      "The International Conference on Smart Computing for Sustainable Development (ICSCSD) is a global platform dedicated to advancing research and innovation in the field of smart computing with a focus on sustainability. The conference aims to bring together researchers, academicians, industry experts, and policymakers to discuss cutting-edge technologies and their role in addressing environmental, societal, and industrial challenges.",
-      "With rapid advancements in artificial intelligence, data science, the Internet of Things (IoT), and next-generation communication systems, there is a growing need to develop intelligent, efficient, and sustainable solutions. ICSCSD provides a collaborative space for sharing knowledge, exploring emerging trends, and fostering interdisciplinary research to drive sustainable development across various domains.",
-      "This conference will feature keynote speeches, technical paper presentations, panel discussions, and workshops led by experts from academia and industry. Attendees will gain insights into novel computing methodologies, smart infrastructure development, sustainable industrial automation, and the application of intelligent systems in healthcare, energy, and urban planning.",
-      "ICSCSD invites high-quality research contributions that push the boundaries of smart computing technologies for sustainability. Participants will have the opportunity to network with leading professionals, exchange ideas, and explore collaborative research opportunities.",
-      "We look forward to welcoming you to ICSCSD, where innovation meets sustainability for a smarter and greener future."
-    ],
-    aboutInstitute: [
-      "Vishwakarma Institute of Technology (VIT), Pune, established in 1983, is a premier autonomous institute that has consistently been at the forefront of technical education in India. Affiliated permanently to Savitribai Phule Pune University, VIT has built a reputation for academic excellence, industry-oriented learning, and cutting-edge research. The institute has been accredited with an 'A++' Grade by the National Assessment and Accreditation Council (NAAC) and all its programs are accredited by the National Board of Accreditation (NBA), reinforcing its commitment to delivering high-quality education.",
-      "VIT offers 12 undergraduate programs, along with postgraduate and doctoral research opportunities, ensuring a holistic academic environment. Over the past four decades, the institute has evolved into a center of excellence, fostering innovation, entrepreneurship, and technological advancements. Its unique educational approach integrates internships, project-based learning, engineering design, and innovation, preparing students to meet the challenges of modern industries and society.",
-      "The institute is part of the Bansilal Ramnath Agarwal Charitable Trust (BRACT), Pune, which was founded in 1975 under the Bombay Trust Act of 1950. The Trust, inspired by the vision of \"Vishwakarma\", the divine architect-engineer in Indian mythology, is dedicated to nurturing professionals who can drive innovation and technological progress. The Vishwakarma Group, under BRACT, has expanded its educational footprint by establishing institutions in engineering, information technology, management, marine industry, creativity & design, international schooling, arts, science, commerce, media, and business consulting.",
-      "With a strong focus on socio-economic upliftment, the Vishwakarma Group has played a pivotal role in empowering individuals and communities by providing quality education and skill development opportunities. The group operates with a philosophy of entrepreneurial independence, allowing its institutions to thrive while leveraging synergies for collective growth.",
-      "As VIT Pune continues to embrace new technologies and pedagogical advancements, it remains committed to producing competent, ethical, and industry-ready engineers who contribute to national and global progress. The institute stands as a beacon of excellence, shaping the future of engineering education and innovation."
-    ],
+aboutConference: [
+  "The International Conference on Smart Computing for Sustainable Development (ICSCSD) brings together researchers, academicians, industry experts, and policymakers to explore how smart computing can address environmental, societal, and industrial challenges.",
+  "The conference focuses on emerging technologies such as artificial intelligence, data science, the Internet of Things (IoT), and next-generation communication systems, encouraging research and collaboration towards sustainable solutions.",
+  "Through keynote speeches, technical paper presentations, panel discussions, and workshops, ICSCSD offers opportunities to share research, exchange ideas, and explore applications in areas such as smart infrastructure, healthcare, energy, and urban planning."
+],
+
+
+aboutInstitute: [
+  "Established in 1983, Vishwakarma Institute of Technology (VIT), Pune, is an autonomous institute affiliated with Savitribai Phule Pune University. Its commitment to academic quality is reflected in its NAAC A++ Grade accreditation.",
+  "The institute offers undergraduate, postgraduate, and doctoral research opportunities across engineering and technology. Its learning environment emphasizes practical application, project-based learning, internships, and industry engagement, helping students connect academic knowledge with real-world challenges.",
+  "VIT Pune is part of the Bansilal Ramnath Agarwal Charitable Trust (BRACT), established in 1975. The Trust supports educational initiatives across disciplines, fostering professional development, innovation, and opportunities for students to contribute meaningfully to society."
+],
+
+
+
+
+
+
     cmtAcknowledgment: "The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support."
   },
   dates: [

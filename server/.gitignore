@@ -14,7 +14,6 @@ uploads/*
 !uploads/*/
 !uploads/**/.gitkeep
 
-
 # Logs
 logs/
 *.log
@@ -26,5 +25,12 @@ pnpm-debug.log*
 # Database & cache
 *.sqlite
 *.sqlite3
+*.sql
+*.dump
 prisma/*.db
 prisma/*.db-journal
+
+# OS & Build files
+desktop.ini
+*.tsbuildinfo
+

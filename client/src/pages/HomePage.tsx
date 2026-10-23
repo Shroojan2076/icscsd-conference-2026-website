@@ -108,7 +108,7 @@ export const HomePage: React.FC = () => {
 
           <div className="hero__metadata-pills">
             <span className="hero__pill">
-              <Calendar size={14} />
+
               <span>November 25–27, 2026</span>
             </span>
             <span className="hero__pill">
@@ -188,32 +188,28 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Organisers & Technical Partners Strip */}
-      <section className="partners-strip">
-        <div className="container partners-grid">
-          <div className="partner-item">
-            <BractLogo className="h-9 w-auto" />
-            <div style={{ fontSize: '0.8rem', lineHeight: '1.2' }}>
-              <strong>BRACT Trust</strong><br />
-              <span style={{ color: 'var(--color-text-muted)' }}>Est. 1975</span>
-            </div>
-          </div>
-          <div className="partner-item">
-            <VitLogo className="h-12 w-auto" />
-            <div style={{ fontSize: '0.8rem', lineHeight: '1.2' }}>
-              <strong>Vishwakarma Institute of Technology</strong><br />
-              <span style={{ color: 'var(--color-emerald-600)', fontWeight: 600 }}>NAAC 'A++' Accredited</span>
-            </div>
-          </div>
-          <div className="partner-item">
-            <IeeeLogo className="h-10 w-auto" />
-            <div style={{ fontSize: '0.8rem', lineHeight: '1.2' }}>
-              <strong>IEEE Pune Section</strong><br />
-              <span style={{ color: 'var(--color-text-muted)' }}>Technical Co-Sponsor</span>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div className="stat-card">
+      <div className="stat-card__number">09</div>
+      <div className="stat-card__label">Conference Research Tracks</div>
+    </div>
+
+    <div className="stat-card">
+      <div className="stat-card__number">Nov 25–27</div>
+      <div className="stat-card__label">2026 · Hybrid Conference<br />Tutorials: November 25</div>
+    </div>
+
+    <div className="stat-card">
+      <div className="stat-card__number">IEEE</div>
+      <div className="stat-card__label">
+        Conference Record #67723<br />
+        ISBN 979-8-3315-8953-0
+      </div>
+    </div>
+  </div>
+</section>
+
+
+     
 
       {/* 4. About the Conference & About VIT Pune Split Section */}
       <section id="about-conference" className="section section--alt">
@@ -241,7 +237,7 @@ export const HomePage: React.FC = () => {
                 </div>
                 <div className="feature-pill">
                   <CheckCircle2 size={18} style={{ color: 'var(--color-emerald-600)', flexShrink: 0 }} />
-                  <span>Peer-Reviewed Paper Sessions</span>
+                  <span>Technical Paper Presentations</span>
                 </div>
                 <div className="feature-pill">
                   <CheckCircle2 size={18} style={{ color: 'var(--color-emerald-600)', flexShrink: 0 }} />
@@ -249,7 +245,7 @@ export const HomePage: React.FC = () => {
                 </div>
                 <div className="feature-pill">
                   <CheckCircle2 size={18} style={{ color: 'var(--color-emerald-600)', flexShrink: 0 }} />
-                  <span>IEEE Xplore Indexing</span>
+                  <span>Papers Submitted to IEEE for Possible Inclusion in IEEE Xplore</span>
                 </div>
               </div>
 
@@ -277,12 +273,23 @@ export const HomePage: React.FC = () => {
                 ))}
               </div>
 
-              <div style={{ marginTop: 'auto', paddingTop: '20px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                <span className="badge badge--success">Est. 1983</span>
-                <span className="badge badge--warning">BRACT Trust (1975)</span>
-                <span className="badge badge--primary">SPPU Affiliated</span>
-                <span className="badge badge--success">NAAC 'A++' Grade</span>
-              </div>
+              <div style={{ marginTop: 'auto', paddingTop: '20px', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}> 
+             <span
+  className="badge badge--success"
+  style={{ width: '100%', boxSizing: 'border-box', justifyContent: 'center', padding: '12px 8px' }}
+>Est. 1983</span>
+               <span
+  className="badge badge--success"
+  style={{ width: '100%', boxSizing: 'border-box', justifyContent: 'center', padding: '12px 8px' }}
+>BRACT Trust (1975)</span>
+                <span
+  className="badge badge--success"
+  style={{ width: '100%', boxSizing: 'border-box', justifyContent: 'center', padding: '12px 8px' }}
+>SPPU Affiliated</span> 
+                <span
+  className="badge badge--success"
+  style={{ width: '100%', boxSizing: 'border-box', justifyContent: 'center', padding: '12px 8px' }}
+>NAAC 'A++' Grade</span> </div>
             </div>
           </div>
         </div>
@@ -292,7 +299,6 @@ export const HomePage: React.FC = () => {
       <section className="section">
         <div className="container">
           <div className="section-header section-header--center">
-            <span className="badge badge--primary">Scope of Submissions</span>
             <h2 style={{ fontSize: 'var(--text-3xl)', color: 'var(--color-navy-950)' }}>
               Conference Research Tracks
             </h2>
@@ -309,9 +315,6 @@ export const HomePage: React.FC = () => {
                     <span className="track-card__number">
                       {String(t.trackNumber).padStart(2, '0')}
                     </span>
-                    <div className="track-card__icon-wrapper">
-                      <Cpu size={22} />
-                    </div>
                   </div>
 
                   <h3 className="track-card__title">
@@ -464,61 +467,54 @@ export const HomePage: React.FC = () => {
             })}
           </div>
 
-          {/* Microsoft CMT Submission Callout Banner with Mandatory Acknowledgment */}
-          <div
-            style={{
-              marginTop: 'var(--space-10)',
-              backgroundColor: 'var(--color-navy-900)',
-              color: '#ffffff',
-              borderRadius: 'var(--radius-lg)',
-              padding: 'var(--space-8)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '16px'
-            }}
-          >
-            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
-              <div>
-                <span className="badge badge--warning" style={{ marginBottom: '8px', display: 'inline-block' }}>
-                  Peer Review Platform
-                </span>
-                <h3 style={{ fontSize: 'var(--text-xl)', color: '#ffffff', marginBottom: '4px' }}>
-                  Share Your Research at ICSCSD-2026
-                </h3>
-                <p style={{ color: 'var(--color-border-subtle)', fontSize: 'var(--text-sm)', maxWidth: '650px' }}>
-                  Submit your original, unpublished manuscripts through the official Microsoft CMT portal: <strong>cmt3.research.microsoft.com/ICSCSD2026</strong>.
-                </p>
-              </div>
+    {/* Important Dates Table */}
+    <div className="dates-table-wrapper">
+      <table className="dates-table">
+        <thead>
+          <tr>
+            <th>Conference Activity</th>
+            <th>Deadline</th>
+          </tr>
+        </thead>
 
-              <a
-                href={config.cmtSubmissionUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn--gold"
-                style={{ flexShrink: 0 }}
-              >
-                <Send size={15} />
-                <span>Submit Manuscript on CMT</span>
-                <ExternalLink size={13} />
-              </a>
-            </div>
+        <tbody>
+          <tr>
+            <td className="dates-table__label">
+              Submission (Hard) Deadline
+            </td>
+            <td className="dates-table__date">30th August 2026</td>
+          </tr>
 
-            {/* Mandatory Microsoft CMT Acknowledgment */}
-            <div
-              style={{
-                borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-                paddingTop: '12px',
-                fontSize: '0.75rem',
-                color: 'var(--color-border-strong)',
-                lineHeight: '1.6'
-              }}
-            >
-              <strong>Microsoft CMT Acknowledgment:</strong> The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
-            </div>
-          </div>
-        </div>
-      </section>
+          <tr>
+            <td className="dates-table__label">
+              Extended Submission Deadline
+            </td>
+            <td className="dates-table__date">—</td>
+          </tr>
+
+          <tr>
+            <td className="dates-table__label">
+              Notification of Acceptance
+            </td>
+            <td className="dates-table__date">10th September 2026</td>
+          </tr>
+
+          <tr>
+            <td className="dates-table__label">
+              Camera-Ready Paper Submission
+            </td>
+            <td className="dates-table__date">15th September 2026</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p className="dates-table__message">
+      Ensure timely submission to be a part of this prestigious event!
+    </p>
+  </div>
+</section>
+
 
       {/* 8. Registration Overview */}
       <section id="register" className="section section--alt">

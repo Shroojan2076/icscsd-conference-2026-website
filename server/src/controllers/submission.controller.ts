@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { validateCameraReadyZip } from '../services/zipValidatorService';
-import { generateVisaSupportLetter } from '../services/pdfGeneratorService';
+import { generateVisaSupportLetter, generateReceiptPdf } from '../services/pdfGeneratorService';
 import { FallbackStore } from '../config/db';
 
 export const submitCameraReady = async (req: Request, res: Response) => {
@@ -142,3 +142,31 @@ export const lookupAuthor = async (req: Request, res: Response) => {
     return res.status(500).json({ success: false, message: err.message });
   }
 };
+
+export const downloadReceipt = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.query;
+    if (!id || typeof id !== 'string') {
+      return res.status(400).json({ success: false, message: 'Registration ID is required' });
+    }
+
+    const order = FallbackStore.razorpayOrders.find(r => r.registrationId === id);
+    const invoice = generateReceiptPdf({
+      registrationId: id,
+      fullName: order ? order.fullName : 'Registered Delegate',
+      email: order ? order.email : 'delegate@vit.edu',
+      category: order ? order.category : 'Author',
+      totalAmount: order ? order.pricing.totalPayable : 8850,
+      currency: order ? order.pricing.currency : 'INR',
+      paymentRef: order ? (order.razorpayPaymentId || 'PAID') : 'VERIFIED'
+    });
+
+    return res.json({
+      success: true,
+      data: invoice
+    });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+};
+

@@ -18,7 +18,8 @@ import {
 import {
   submitCameraReady,
   requestVisaLetter,
-  lookupAuthor
+  lookupAuthor,
+  downloadReceipt
 } from '../controllers/submission.controller';
 import {
   adminLogin,
@@ -41,6 +42,7 @@ import { uploadProposalPdf, uploadZip } from '../middlewares/upload.middleware';
 const router = Router();
 
 // ================= PUBLIC ROUTES =================
+
 router.get('/bootstrap', getBootstrap);
 router.get('/config', getConfig);
 router.get('/dates', getDates);
@@ -72,6 +74,7 @@ router.post('/submissions/camera-ready', uploadZip.single('zipFile'), submitCame
 // Author Portal Services
 router.post('/authors/visa-letter', requestVisaLetter);
 router.get('/authors/lookup', lookupAuthor);
+router.get('/authors/receipt', downloadReceipt);
 
 // Admin Authentication
 router.post('/admin/login', adminLogin);

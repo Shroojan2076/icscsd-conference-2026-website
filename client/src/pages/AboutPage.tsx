@@ -1,6 +1,5 @@
 import React from 'react';
 import { Building, Award, ShieldCheck, ExternalLink, Globe, BookOpen, CheckCircle } from 'lucide-react';
-import { VitLogo, BractLogo, IeeeLogo } from '../components/LogoSvg';
 
 export const AboutPage: React.FC = () => {
   return (
@@ -20,7 +19,12 @@ export const AboutPage: React.FC = () => {
         {/* Section 1: About BRACT Trust */}
         <section id="bract" className="policy-card" style={{ marginBottom: 'var(--space-8)', borderLeft: '4px solid var(--color-accent-gold)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
-            <BractLogo className="h-12 w-auto" />
+            <img
+              className="about-institution__logo"
+              src="/images/bract-building.webp"
+              alt="Building on the BRACT campus"
+              loading="lazy"
+            />
             <div>
               <h2 style={{ fontSize: 'var(--text-xl)', color: 'var(--color-navy-950)' }}>
                 Bansilal Ramnath Agarwal Charitable Trust (BRACT)
@@ -33,10 +37,12 @@ export const AboutPage: React.FC = () => {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', fontSize: 'var(--text-sm)', color: 'var(--color-text-secondary)', lineHeight: '1.75' }}>
             <p>
-              Bansilal Ramnath Agarwal Charitable Trust (BRACT) was established on 16th June 1975 under the visionary foresight of the Agarwal industrial family. Dedicated to social upliftment, cultural preservation, and academic excellence, BRACT was founded with the mission to build world-class educational institutions in Maharashtra.
+              <b>Bansilal Ramnath Agarwal Charitable Trust (BRACT)</b> was established on 16th June 1975 by the Agarwal industrial family, with a vision to promote social upliftment, cultural preservation, and academic excellence through world-class educational institutions in Maharashtra.
+
             </p>
             <p>
-              Over five decades, BRACT has nurtured a diverse ecosystem of institutes spanning engineering, information technology, management, and research, collectively known across India as the <strong>Vishwakarma Institutes & University</strong>. BRACT’s educational institutions are recognized nationwide for academic rigor, state-of-the-art research laboratories, global industry collaborations, and an unwavering commitment to ethics and societal development.
+             Over five decades, BRACT has developed a diverse network of institutes spanning engineering, technology, management, and research, collectively known as the <b>Vishwakarma Institutes & University</b>. Its institutions are recognized for academic excellence, advanced research facilities, global industry collaborations, and commitment to ethics and societal development.
+
             </p>
           </div>
 
@@ -50,7 +56,12 @@ export const AboutPage: React.FC = () => {
         {/* Section 2: About VIT Pune */}
         <section id="vit-pune" className="policy-card" style={{ marginBottom: 'var(--space-8)', borderLeft: '4px solid var(--color-ieee-blue)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
-            <VitLogo className="h-16 w-auto" />
+            <img
+              className="about-institution__logo"
+              src="/images/vit-logo.png"
+              alt="Vishwakarma Institute of Technology logo"
+              loading="lazy"
+            />
             <div>
               <h2 style={{ fontSize: 'var(--text-xl)', color: 'var(--color-navy-950)' }}>
                 Vishwakarma Institute of Technology (VIT), Pune
@@ -63,13 +74,22 @@ export const AboutPage: React.FC = () => {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', fontSize: 'var(--text-sm)', color: 'var(--color-text-secondary)', lineHeight: '1.75' }}>
             <p>
-              Vishwakarma Institute of Technology (VIT), Pune, is a premier autonomous engineering institute established in the year 1983 under BRACT. The Institute is permanently affiliated to <strong>Savitribai Phule Pune University (SPPU)</strong>, recognized by the All India Council for Technical Education (AICTE), New Delhi, and accredited by the National Assessment and Accreditation Council (NAAC) with the prestigious <strong>'A++' Grade</strong>.
+              <strong>Vishwakarma Institute of Technology (VIT), Pune</strong>, established
+  in 1983 under BRACT, is a premier autonomous engineering institute
+  permanently affiliated with <strong>Savitribai Phule Pune University (SPPU)</strong>,
+  recognized by <strong>AICTE</strong>, and accredited with
+  <strong>NAAC 'A++' Grade</strong>.
             </p>
             <p>
-              VIT Pune runs 12 undergraduate, postgraduate, and doctoral degree programs across engineering disciplines, with all eligible undergraduate programs accredited by the <strong>National Board of Accreditation (NBA)</strong>. The institute boasts a sprawling 17.5-acre campus in Bibwewadi, Pune, equipped with high-performance computing clusters, IoT and robotics maker-spaces, artificial intelligence labs, and advanced renewable energy research testbeds.
+              Offering 12 undergraduate, postgraduate, and doctoral programs, VIT Pune
+  features NBA-accredited eligible undergraduate programs and a 17.5-acre
+  campus equipped with advanced research laboratories, AI facilities, and
+  IoT and robotics infrastructure.
             </p>
             <p>
-              The institute has consistently ranked among the top private engineering institutions in India in the National Institutional Ranking Framework (NIRF). VIT Pune has developed robust international research partnerships with leading global universities across the United States, Europe, Australia, and Asia.
+              Consistently ranked among India's leading private engineering institutions
+  under <strong>NIRF</strong>, VIT Pune also maintains international research
+  collaborations with universities worldwide.
             </p>
           </div>
 
@@ -97,7 +117,12 @@ export const AboutPage: React.FC = () => {
         {/* Section 3: About IEEE Pune Section */}
         <section id="ieee-pune" className="policy-card" style={{ borderLeft: '4px solid var(--color-emerald-600)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
-            <IeeeLogo className="h-14 w-auto" />
+            <img
+              className="about-institution__logo"
+              src="/images/ieee-logo.jpg"
+              alt="IEEE logo"
+              loading="lazy"
+            />
             <div>
               <h2 style={{ fontSize: 'var(--text-xl)', color: 'var(--color-navy-950)' }}>
                 IEEE Pune Section (Technical Co-Sponsor)
@@ -110,10 +135,19 @@ export const AboutPage: React.FC = () => {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', fontSize: 'var(--text-sm)', color: 'var(--color-text-secondary)', lineHeight: '1.75' }}>
             <p>
-              The <strong>Institute of Electrical and Electronics Engineers (IEEE)</strong> is the world’s largest technical professional organization dedicated to advancing technology for the benefit of humanity. The <strong>IEEE Pune Section</strong>, established in June 2010 (under IEEE Bombay Section initially, now an independent section), serves professionals, researchers, and students across Pune, Ahmednagar, Satara, Solapur, Sangli, and Kolhapur regions of Maharashtra.
+               The <strong>Institute of Electrical and Electronics Engineers (IEEE)</strong>
+  is the world's largest technical professional organization dedicated to
+  advancing technology for humanity. Established in June 2010, the
+  <strong>IEEE Pune Section</strong> supports professionals, researchers, and
+  students across Pune and surrounding regions of Maharashtra.
             </p>
             <p>
-              IEEE Pune Section actively promotes state-of-the-art technological advancements by co-sponsoring flagship conferences, symposia, research workshops, humanitarian activities, and industry conclaves. ICSCSD 2026 is technically co-sponsored by IEEE Pune Section under IEEE Conference Record <strong>#67723</strong>, ensuring peer-reviewed conference proceedings will be submitted for inclusion into IEEE Xplore subject to meeting IEEE scope and quality requirements.
+              Through conferences, research workshops, technical events, and industry
+  collaborations, IEEE Pune Section promotes technological advancement.
+  <strong>ICSCSD 2026</strong> is technically co-sponsored by the section under
+  IEEE Conference Record <strong>#67723</strong>, with peer-reviewed proceedings
+  to be submitted for inclusion in IEEE Xplore, subject to IEEE's scope and
+  quality requirements.
             </p>
           </div>
 
