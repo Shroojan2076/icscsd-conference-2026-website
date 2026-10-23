@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Users, Search, UserCheck, Award, Briefcase, Building, Sparkles } from 'lucide-react';
+import { Users, Search, UserCheck, Award, Briefcase, Building, Sparkles, UserRound } from 'lucide-react';
 import { useBootstrap } from '../api/client';
 import { CommitteeMember } from '../types';
 
@@ -64,12 +64,31 @@ export const CommitteePage: React.FC<CommitteePageProps> = ({
           <span className="badge badge--primary" style={{ alignSelf: 'flex-start' }}>
             International Leadership & Advisory
           </span>
-          <h1 style={{ fontSize: 'var(--text-3xl)', color: '#ffffff' }}>
+          
+          <h1
+            style={{
+              fontSize: '30px',
+              lineHeight: 1.3,
+              fontWeight: 600,
+              color: '#ffffff',
+              margin: 0
+            }}
+          >
             {pageTitle}
           </h1>
-          <p style={{ color: 'var(--color-border-subtle)', maxWidth: '800px', fontSize: 'var(--text-base)' }}>
+         
+          <p
+            style={{
+              color: 'var(--color-border-subtle)',
+              maxWidth: '650px',
+              fontSize: '14px',
+              lineHeight: 1.5,
+              margin: '8px 0 0'
+            }}
+          >
             Distinguished professors, research directors, institutional deans, and academic leaders guiding ICSCSD 2026.
           </p>
+
         </div>
       </section>
 
@@ -151,21 +170,22 @@ export const CommitteePage: React.FC<CommitteePageProps> = ({
                     <div key={member.id} className="card" style={{ padding: 'var(--space-4)' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
                         <div
+                          aria-label={`Photo placeholder for ${member.fullName}`}
                           style={{
-                            width: '36px',
-                            height: '36px',
-                            borderRadius: 'var(--radius-full)',
-                            backgroundColor: 'var(--color-ieee-blue-light)',
-                            color: 'var(--color-ieee-blue)',
+                            width: '64px',
+                            height: '64px',
+                            borderRadius: '50%',
+                            backgroundColor: '#F1F5F9',
+                            border: '1px solid #D6DEE8',
+                            color: '#64748B',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            fontWeight: 800,
-                            fontSize: '0.85rem',
-                            flexShrink: 0
+                            flexShrink: 0,
+                            overflow: 'hidden'
                           }}
                         >
-                          {member.fullName.charAt(0) || 'D'}
+                          <UserRound size={30} strokeWidth={1.5} />
                         </div>
                         <div>
                           <h4 style={{ fontSize: 'var(--text-sm)', color: 'var(--color-navy-950)', fontWeight: 700 }}>
@@ -183,21 +203,65 @@ export const CommitteePage: React.FC<CommitteePageProps> = ({
             ))}
           </div>
         ) : (
-          <div className="grid-3" style={{ gap: '16px' }}>
-            {filteredMembers.map(member => (
-              <div key={member.id} className="card" style={{ padding: 'var(--space-4)' }}>
-                <span className="badge badge--primary" style={{ alignSelf: 'flex-start', marginBottom: '8px' }}>
-                  {member.categoryLabel}
-                </span>
-                <h4 style={{ fontSize: 'var(--text-sm)', color: 'var(--color-navy-950)', fontWeight: 700, marginBottom: '4px' }}>
-                  {member.fullName}
-                </h4>
-                <p style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-secondary)', lineHeight: '1.5' }}>
-                  {member.roleOrAffiliation}
-                </p>
-              </div>
-            ))}
-          </div>
+          
+<div className="grid-3" style={{ gap: '16px' }}>
+  {filteredMembers.map(member => (
+    <div
+      key={member.id}
+      className="card"
+      style={{ padding: 'var(--space-4)' }}
+    >
+      {/* Photo placeholder */}
+      <div
+        aria-label={`Photo placeholder for ${member.fullName}`}
+        style={{
+          width: '80px',
+          height: '80px',
+          borderRadius: '50%',
+          backgroundColor: '#F1F5F9',
+          border: '1px solid #D6DEE8',
+          color: '#64748B',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: '12px',
+          overflow: 'hidden'
+        }}
+      >
+        <UserRound size={36} strokeWidth={1.5} />
+      </div>
+
+      <span
+        className="badge badge--primary"
+        style={{ alignSelf: 'flex-start', marginBottom: '8px' }}
+      >
+        {member.categoryLabel}
+      </span>
+
+      <h4
+        style={{
+          fontSize: 'var(--text-sm)',
+          color: 'var(--color-navy-950)',
+          fontWeight: 700,
+          marginBottom: '4px'
+        }}
+      >
+        {member.fullName}
+      </h4>
+
+      <p
+        style={{
+          fontSize: 'var(--text-xs)',
+          color: 'var(--color-text-secondary)',
+          lineHeight: '1.5'
+        }}
+      >
+        {member.roleOrAffiliation}
+      </p>
+    </div>
+  ))}
+</div>
+
         )}
       </div>
     </div>
